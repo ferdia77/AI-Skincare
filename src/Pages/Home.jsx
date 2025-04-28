@@ -3,7 +3,7 @@ import React from 'react'
 const Home = () => {
   return (
     <div>
-      <div className="w-full flex items-center justify-end ">
+      <div className="w-full flex items-center justify-between ">
         <div>
             <a className='px-3 text-xs '>
                 SKINSTRIC
