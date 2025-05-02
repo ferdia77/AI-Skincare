@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 
 const TakeTheTest = () => {
-    const[phase, setPhase] = useState(1)
-
-    https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne
+    const [phase, setPhase] = useState(1)
+    const [location, setLocation] = useState([])
+    const [name, setName] = useState([])
     
-    {
-        "name": "John Doe",
-        "location": ""
+    
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -16,6 +14,11 @@ const TakeTheTest = () => {
             input2Ref.current.focus();
         }
             
+    }
+
+    async function passValueBackend() {
+        const data = fetch("https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne")
+        console.log(fetch)
     }
 
 
