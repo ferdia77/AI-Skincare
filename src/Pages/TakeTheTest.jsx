@@ -1,8 +1,13 @@
 import React from "react";
 
-function textInput() {
-    
+const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        input2Ref.current.focus();
+    }
+        
 }
+
 
 const TakeTheTest = () => {
   return (
@@ -16,7 +21,7 @@ const TakeTheTest = () => {
         <p className="text-[10px] text-gray-400 tracking-wider uppercase mb-1">CLICK TO TYPE</p>
         <input className="text-3xl font-semibold text-center bg-transparent border-b
          border-black focus:outline-none appearance-none w-[300px] leading-none pt-1"
-         placeholder="Introduce Yourself" type="text" />
+         placeholder="Introduce Yourself" onKeyDown={handleKeyDown} type="text" />
       </div>
       <div className="absolute bottom-10 w-full flex justify-between px-10 cursor-pointer">
         <div className="relative w-12 h-12 left-4 flex items-center justify-center border 
