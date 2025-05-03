@@ -18,7 +18,7 @@ const TakeTheTest = () => {
 
     async function passValueBackend() {
         const data = fetch("https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne")
-        console.log(fetch)
+        console.log(data)
     }
 
 
@@ -33,10 +33,10 @@ const TakeTheTest = () => {
         <p className="text-[10px] text-gray-400 tracking-wider uppercase mb-1">CLICK TO TYPE</p>
         {phase === 1 ? <input className="text-3xl font-semibold text-center bg-transparent border-b
             border-black focus:outline-none appearance-none w-[300px] leading-none pt-1"
-            placeholder="Introduce Yourself" onKeyDown={handleKeyDown} type="text" name="" onChange={(event) => setName(event.target.value)} />  
+            placeholder="Introduce Yourself" onKeyDown={handleKeyDown} type="text" value={name} onChange={(event) => setName(event.target.value)} />  
              : <input className="text-3xl font-semibold text-center bg-transparent border-b
             border-black focus:outline-none appearance-none w-[300px] leading-none pt-1"
-            placeholder="What City are you from" location="" onChange={(event) => setLocation(event.target.value)} type="text" />
+            placeholder="What City are you from" value={location} onChange={(event) => setLocation(event.target.value)} type="text" />
         }
       </div>
       <div className="absolute bottom-10 w-full flex justify-between px-10 cursor-pointer">
