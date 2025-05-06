@@ -14,6 +14,17 @@ const TakeTheTest = () => {
     setLocation(event.target.value);
   };
 
+  const handleNameKeyPress = (event) => {
+    if (event.key === "Enter") {
+      document.getElementById("location-input").focus(); // Assuming you have given the location input an id of `location-input`
+    }
+  };
+
+  const handleSubmit = () => {
+    console.log(name, location); // Log the inputs
+    passValueBackend(name, location); // Call your backend function
+  };
+
   async function passValueBackend(name, location) {
     try {
       useEffect(() => {
@@ -36,16 +47,6 @@ const TakeTheTest = () => {
       console.error("Error sendng data to backend:", error);
     }
 
-    const handleNameKeyPress = (event) => {
-      if (event.key === "Enter") {
-        document.getElementById("location-input").focus(); // Assuming you have given the location input an id of `location-input`
-      }
-    };
-
-    const handleSubmit = () => {
-      console.log(name, location); // Log the inputs
-      passValueBackend(name, location); // Call your backend function
-    };
   }
 
   return (
