@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 const TakeTheTest = () => {
   const [phase, setPhase] = useState(1);
-  const [location, setLocation] = useState([]);
-  const [name, setName] = useState([]);
+  const [location, setLocation] = useState("");
+  const [name, setName] = useState("");
   const input2Ref = useRef(null);
 
   const handleKeyDown = (e) => {
@@ -24,14 +24,30 @@ const TakeTheTest = () => {
     }
   };
 
-  async function passValueBackend (name, location) {
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    console.log(name, location); // Log here to see updated values
+    passValueBackend(name, location);
+  };
+
+  async function passValueBackend(name, location) {
     try {
+      useEffect(() => {
+        console.log(name, location); // Logs whenever name or location changes
+      }, [name, location]);
       const response = await fetch(
         "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne",
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json,",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({ name, location }),
         }
@@ -64,7 +80,7 @@ const TakeTheTest = () => {
             onKeyDown={handleKeyDown}
             type="text"
             value={name}
-            onChange={(event) => setName(event.target.value)}
+            onChange={handleNameChange}
           />
         ) : (
           <input
@@ -74,7 +90,7 @@ const TakeTheTest = () => {
             placeholder="What City are you from"
             onKeyDown={handleKeyDown}
             value={location}
-            onChange={(event) => setLocation(event.target.value)}
+            onChange={handleLocationChange}
             type="text"
           />
         )}
