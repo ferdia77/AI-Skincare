@@ -16,7 +16,8 @@ const TakeTheTest = () => {
 
   const handleNameKeyPress = (event) => {
     if (event.key === "Enter") {
-      locationInputRef.current.focus(); // 
+      locationInputRef.current.focus();
+      setPhase(2)
     }
   };
 
@@ -77,7 +78,7 @@ const TakeTheTest = () => {
         ) : (
           <>
             <input
-              ref={input2Ref}
+              ref={locationInputRef}
               className="text-3xl font-semibold text-center bg-transparent border-b
             border-black focus:outline-none appearance-none w-[320px] leading-none pt-1"
               placeholder="What City are you from"
