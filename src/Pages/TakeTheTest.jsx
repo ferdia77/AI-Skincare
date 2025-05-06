@@ -24,7 +24,7 @@ const TakeTheTest = () => {
     }
   };
 
-  async function passValueBackend() {
+  async function passValueBackend (name, location) {
     try {
       const response = await fetch(
         "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne",
