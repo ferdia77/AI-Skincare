@@ -6,35 +6,12 @@ const TakeTheTest = () => {
   const [name, setName] = useState("");
   const input2Ref = useRef(null);
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      setPhase(2);
-      e.preventDefault();
-
-      if (phase === 1) {
-        setPhase(2);
-        //waiting for next render cycle before focusing setTimeout
-        setTimeout(() => {
-          input2Ref.current.focus();
-        }, 0);
-      } else {
-        //phase2 complete: send data to backend
-        passValueBackend();
-      }
-    }
-  };
-
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
 
   const handleLocationChange = (event) => {
     setLocation(event.target.value);
-  };
-
-  const handleSubmit = () => {
-    console.log(name, location); // Log here to see updated values
-    passValueBackend(name, location);
   };
 
   async function passValueBackend(name, location) {
@@ -58,6 +35,17 @@ const TakeTheTest = () => {
     } catch (error) {
       console.error("Error sendng data to backend:", error);
     }
+
+    const handleNameKeyPress = (event) => {
+      if (event.key === "Enter") {
+        document.getElementById("location-input").focus(); // Assuming you have given the location input an id of `location-input`
+      }
+    };
+
+    const handleSubmit = () => {
+      console.log(name, location); // Log the inputs
+      passValueBackend(name, location); // Call your backend function
+    };
   }
 
   return (
@@ -72,27 +60,33 @@ const TakeTheTest = () => {
           CLICK TO TYPE
         </p>
         {phase === 1 ? (
-          <input
-            ref={input2Ref}
-            className="text-3xl font-semibold text-center bg-transparent border-b
+          <>
+            <input
+              ref={input2Ref}
+              className="text-3xl font-semibold text-center bg-transparent border-b
             border-black focus:outline-none appearance-none w-[300px] leading-none pt-1"
-            placeholder="Introduce Yourself"
-            onKeyDown={handleKeyDown}
-            type="text"
-            value={name}
-            onChange={handleNameChange}
-          />
+              placeholder="Introduce Yourself"
+              onKeyDown={handleNameKeyPress}
+              type="text"
+              value={name}
+              onChange={handleNameChange}
+            />
+            {name.length > 0 && <button onClick={handleNameKeyPress}>Proceed</button>}
+          </>
         ) : (
-          <input
-            ref={input2Ref}
-            className="text-3xl font-semibold text-center bg-transparent border-b
+          <>
+            <input
+              ref={input2Ref}
+              className="text-3xl font-semibold text-center bg-transparent border-b
             border-black focus:outline-none appearance-none w-[320px] leading-none pt-1"
-            placeholder="What City are you from"
-            onKeyDown={handleKeyDown}
-            value={location}
-            onChange={handleLocationChange}
-            type="text"
-          />
+              placeholder="What City are you from"
+              onKeyDown={handleSubmit}
+              value={location}
+              onChange={handleLocationChange}
+              type="text"
+            />
+            {name.length > 0 && <button onClick={handleSubmit}>Proceed</button>}
+          </>
         )}
       </div>
       <div className="absolute bottom-10 w-full flex justify-between px-10 cursor-pointer">
