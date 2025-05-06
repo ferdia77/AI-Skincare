@@ -28,9 +28,7 @@ const TakeTheTest = () => {
 
   async function passValueBackend(name, location) {
     try {
-      useEffect(() => {
-        console.log(name, location); // Logs whenever name or location changes
-      }, [name, location]);
+     
       const response = await fetch(
         "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne",
         {
