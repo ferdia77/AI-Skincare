@@ -4,7 +4,7 @@ const TakeTheTest = () => {
   const [phase, setPhase] = useState(1);
   const [location, setLocation] = useState("");
   const [name, setName] = useState("");
-  const input2Ref = useRef(null);
+  const locationInputRef = useRef(null);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -16,7 +16,7 @@ const TakeTheTest = () => {
 
   const handleNameKeyPress = (event) => {
     if (event.key === "Enter") {
-      document.getElementById("location-input").focus(); // Assuming you have given the location input an id of `location-input`
+      locationInputRef.current.focus(); // 
     }
   };
 
@@ -63,7 +63,7 @@ const TakeTheTest = () => {
         {phase === 1 ? (
           <>
             <input
-              ref={input2Ref}
+              ref={locationInputRef}
               className="text-3xl font-semibold text-center bg-transparent border-b
             border-black focus:outline-none appearance-none w-[300px] leading-none pt-1"
               placeholder="Introduce Yourself"
