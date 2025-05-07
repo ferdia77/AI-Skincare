@@ -1,10 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const TakeTheTest = () => {
   const [phase, setPhase] = useState(1);
   const [location, setLocation] = useState("");
   const [name, setName] = useState("");
   const locationInputRef = useRef(null);
+  const navigate = useNavigate()
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -24,6 +26,12 @@ const TakeTheTest = () => {
   const handleSubmit = () => {
     console.log(name, location); // Log the inputs
     passValueBackend(name, location); // Call your backend function
+        then(() => {
+            navigate('/Testing')
+        })
+        .catch(err => {
+            console.error("Error: ", err);
+        })
   };
 
   async function passValueBackend(name, location) {
