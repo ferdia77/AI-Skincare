@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Router } from "react-router-dom";
 
 const TakeTheTest = () => {
   const [phase, setPhase] = useState(1);
@@ -25,19 +25,18 @@ const TakeTheTest = () => {
 
   const handleSubmit = () => {
     console.log(name, location); // Log the inputs
-    passValueBackend(name, location); // Call your backend function
-        then(() => {
-            navigate('/Testing')
+    passValueBackend(name, location).then(() => {
+            Router.push('/Testing')
         })
         .catch(err => {
             console.error("Error: ", err);
         })
   };
 
-  async function passValueBackend(name, location) {
+    const passValueBackend = async (name, location) => {
     try {
      
-      const response = await fetch(
+      const res = await fetch(
         "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne",
         {
           method: "POST",
@@ -45,10 +44,10 @@ const TakeTheTest = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ name, location }),
-        }
-      );
+        });
+        return res.json(); 
 
-      const result = await response.json();
+      //const result = await response.json();
       console.log("Backend response:", result);
     } catch (error) {
       console.error("Error sendng data to backend:", error);
