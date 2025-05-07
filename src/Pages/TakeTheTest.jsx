@@ -1,6 +1,6 @@
 'useClient'
 import React, { useRef, useState, useEffect } from "react";
-import { Navigate, Router, useNavigate, } from "react-router-dom";
+import { Router, useNavigate, } from "react-router-dom";
 
 
 const TakeTheTest = () => {
