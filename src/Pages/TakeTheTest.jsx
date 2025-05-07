@@ -8,7 +8,7 @@ const TakeTheTest = () => {
   const [location, setLocation] = useState("");
   const [name, setName] = useState("");
   const locationInputRef = useRef(null);
-  const navigate = useNavigate
+  const navigate = useNavigate()
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -89,7 +89,6 @@ const TakeTheTest = () => {
               className="text-3xl font-semibold text-center bg-transparent border-b
             border-black focus:outline-none appearance-none w-[320px] leading-none pt-1"
               placeholder="What City are you from"
-              onKeyDown={handleSubmit}
               value={location}
               onChange={handleLocationChange}
               type="text"
