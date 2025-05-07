@@ -8,6 +8,7 @@ const TakeTheTest = () => {
   const [location, setLocation] = useState("");
   const [name, setName] = useState("");
   const locationInputRef = useRef(null);
+  const navigate = useNavigate
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -27,7 +28,7 @@ const TakeTheTest = () => {
   const handleSubmit = () => {
     console.log(name, location); // Log the inputs
     passValueBackend(name, location).then(() => {
-            router.push('/Testing')
+            navigate('/Testing')
         })
         .catch(err => {
             console.error("Error: ", err);
