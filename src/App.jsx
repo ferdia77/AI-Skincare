@@ -2,6 +2,7 @@ import Home from "./Pages/Home";
 import TakeTheTest from "./Pages/TakeTheTest";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Testing from "./Pages/Testing";
+import { Result } from "postcss";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/TakeTheTest" element={<TakeTheTest />} />
         <Route path="/Testing" element={<Testing />} />
+        <Route path="/Result" element={<Result />} />
       </Routes>
     </Router>
   );
