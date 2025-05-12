@@ -2,7 +2,7 @@ import Home from "./Pages/Home";
 import TakeTheTest from "./Pages/TakeTheTest";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Testing from "./Pages/Testing";
-import { Result } from "postcss";
+import Result from "./Pages/Result";
 
 function App() {
   return (
