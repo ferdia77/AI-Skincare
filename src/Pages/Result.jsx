@@ -101,18 +101,18 @@ const Result = () => {
           flex flex-col items-center cursor-pointer"
           >
             <Diamond
-              //ref={outerDiamondRefCamera}
+              ref={outerDiamondRefCamera}
               className="!w-[120px] !h-[120px] md:!w-[300px] md:h![300px]
                rotate-45 border-gray-800"
             />
             <Diamond
-              //ref={midDiamondRefCamera}
+              ref={midDiamondRefCamera}
               className="!w-[110px] !h-[110px] md:!w-[290px] md:h![290px] absolute
                top-1/2 left-1/2  translate-y-1/2 rotate-45 border-gray-800"
               dotted borderColourClass="border-gray-800"
             />
             <Diamond
-              //ref={innerDiamondRefCamera}
+              ref={innerDiamondRefCamera}
               className="!w-[120px] !h-[120px] md:!w-[300px] md:h![300px]
                rotate-45 border-gray-800"
             />
@@ -120,6 +120,10 @@ const Result = () => {
             {/* Camera Icon & Label */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <Camera className="w-6 h-6 md:w-12 md:h-12" />
+              <div className="w-[40px] md:w-[80px] h-px bg-black" />
+              <p className="text-[7px] md:text-[10px] font-semibold mt-1 leading-tight">
+                ALLOW A.I. <br /> TO SCAN YOUR FACE
+              </p>
             </div>
           </div>
         </div>
