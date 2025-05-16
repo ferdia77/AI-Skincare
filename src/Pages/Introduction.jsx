@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { Router, useNavigate, } from "react-router-dom";
 
 
-const TakeTheTest = () => {
+const Introduction = () => {
   const [phase, setPhase] = useState(1);
   const [location, setLocation] = useState("");
   const [name, setName] = useState("");
@@ -112,4 +112,4 @@ const TakeTheTest = () => {
   );
 };
 
-export default TakeTheTest;
+export default Introduction;

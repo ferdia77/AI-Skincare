@@ -1,7 +1,7 @@
 "use client"
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
-import Diamond from "../../Components/Diamond";
+import Diamond from "../Components/Diamond";
 import { Camera, Image as ImageIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -20,7 +20,6 @@ const continuousRotation = (target, duration) => {
 };
 
 const Result = () => {
-  const Router = useRouter();
   const fileInputRef = useRef(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +34,7 @@ const Result = () => {
   const innerDiamondRefGallery = useRef(null);
 
   useEffect(() => {
-    const storedImage = localStoragr.getItem("captureImage");
+    const storedImage = localStorage.getItem("captureImage");
     if (storedImage) {
       setPreviewImage(storedImage);
     } else {
