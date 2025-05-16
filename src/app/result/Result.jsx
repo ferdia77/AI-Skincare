@@ -1,6 +1,7 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import { gsap } from "gsap";
-import Diamond from "../Components/Diamond";
+import Diamond from "./Diamond";
 import { Camera, Image as ImageIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
