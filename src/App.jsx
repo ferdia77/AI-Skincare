@@ -4,7 +4,7 @@ import Home from "./Pages/Home";
 import TakeTheTest from "./Pages/TakeTheTest";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Testing from "./Pages/Testing";
-import Result from "./Components/Result";
+import Result from "./Pages/Result/Result";
 
 function App() {
   return (
