@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import Diamond from "../Components/Diamond";
 import { Camera, Image as ImageIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { Link } from "react-router-dom";
 
 const continuousRotation = (target, duration) => {
   gsap.to(target, {
@@ -41,33 +41,100 @@ const Result = () => {
       setPreviewImage(null);
     }
     if (outerDiamondRefCamera.current) {
-      continuousRotation(midDiamondRefCamera.current, 5);
+      continuousRotation(outerDiamondRefCamera.current, 5);
     }
     if (midDiamondRefCamera.current) {
       continuousRotation(midDiamondRefCamera.current, 5.25);
     }
-    if (outerDiamondRefCamera.current) {
+    if (innerDiamondRefCamera.current) {
       continuousRotation(innerDiamondRefCamera.current, 5.5)
     }
     if (outerDiamondRefGallery.current) {
-      continuousRotation(midDiamondRefGallery.current, 5);
+      continuousRotation(outerDiamondRefGallery.current, 5);
     }
     if (midDiamondRefGallery.current) {
       continuousRotation(midDiamondRefGallery.current, 5.25);
     }
-    if (outerDiamondRefCamera.current) {
+    if (innerDiamondRefGallery.current) {
       continuousRotation(innerDiamondRefGallery.current, 5.5)
     }
 
     return () => {
       setPreviewImage(null);
     };
-  }, [])
+  }, []);
+
+  const handleCameraAccess = () => {
+    Router.push("/scan");
+  };
+
+  const handleGalleryUpload = () => {
+    fileInputRef.current.click();
+  }
+
+  const ImageLoader = () => {
+    const [previewImage, setPreviewImage] = useState('');
+
+    const handleImageChange = (e) => {
+      const file = event.target.files[0]; // Grab the first file chosen
+
+      if (file) {
+        const reader = new FileReader(); // Create a FileReader object
+
+        reader.onloadend = () => {
+          const base64String = reader.result;
+          setPreviewImage(base64String); // Set the Base64 string to previewImage
+          localStorage.setItem("capturedImage", base64String);
+        }
+
+        reader.readAsDataURL(file); // Read the file as a data
+      }
+    }
+  }
+
+  const handleProcessImage = async () => {
+    if (!previewImage) return;
+
+    setIsLoading(true);
+    setAPIMessage("Starting image processing...");
+    setAPIProgress(0);
+
+    try {
+      const response = await fetch(
+        "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
+        {
+          method:"POST",
+          headers: { "Content-Type": "application/json"},
+          body: JSON.stringify({ image: previewImage }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`);
+      }
+
+      const result = await response.json();
+      localStorage.setItem("analysisResult", JSON.stringify(result));
+
+      setAPIMessage("Processing complete!");
+      await new Promise((resolve, 1000));
+
+      Router.push("/select");
+    } catch (error) {
+      console.error("Error processing image:", error);
+      setAPIMessage("An error occurred during processing.");
+    } finally {
+      setIsLoading(false);
+      setAPIProgress(0);
+      setAPIMessage("");
+    }
+
+  };
 
   return (
     <>
       <div className="flex flex-row h-[64px] w-full justify-between py-3 mb-3">
-        <div className="flex flex-row pt-1 scale-75 pl-12 pt-8">
+        <div className="flex flex-row pt-1 scale-75 pl-12">
           <a
             className="inline-flex items-center justify-center gap-2
            whitespace-nowrap rounded-md transition-colours focus-visible:outline-none
@@ -115,6 +182,7 @@ const Result = () => {
               ref={innerDiamondRefCamera}
               className="!w-[120px] !h-[120px] md:!w-[300px] md:h![300px]
                rotate-45 border-gray-800"
+               dotted borderColorClass="border-gray-800"
             />
 
             {/* Camera Icon & Label */}
@@ -127,6 +195,69 @@ const Result = () => {
             </div>
           </div>
         </div>
+        
+        {/* GALLERY SECTION */}
+        <div
+        className="relative md:absolute md:left-[60%]  flex flex-col items-center
+        cursor-pointer mt-12"
+        onClick={handleGalleryUpload}
+        >
+          <Diamond 
+            ref={outerDiamondRefGallery}
+            className="!w-[120px] !h-[120px] md:!w-[300px] md:h![300px]
+               rotate-45 border-gray-800"
+          />
+          <Diamond 
+            ref={midDiamondRefGallery}
+            className="!w-[110px] !h-[110px] md:!w-[290px] md:h![290px] absolute
+               top-1/2 left-1/2  translate-y-1/2 rotate-45 border-gray-800"
+              dotted borderColourClass="border-gray-800"
+          />
+          <Diamond 
+            ref={innerDiamondRefGallery}
+            className="!w-[120px] !h-[120px] md:!w-[300px] md:h![300px]
+               rotate-45 border-gray-800"
+            dotted borderColorClass="border-gray-800"
+          />
+
+          {/* Gallery ICON & LABEL */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <ImageIcon className="w-6 h-6 md:w-12 md:h-12" />
+            <div className="absolute top-[55%] left[-40px] md:left-[-90px] translate-y-[20px]">
+              <div className="w-[40px] md:w-[80px] h-px bg-black" />
+              <p className="text-[7px] md:text-[10px] font-semibold mt-1 leading-tight">
+                ALLOW A.I.<br />ACCESS GALLERY
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+        <div className="absolute bottom-10 w-full flex justify-between px-10 pb-11">
+          <div className="relative w-14 h-14 left-4 flex items-center justify-center border border-black rotate-45 scale-[0.85]">
+            <span className="absolute rotate-[-45deg] text-xs font-semibold">
+              BACK
+            </span>
+          </div>
+          <Link className="absolute inset-0" aria-label="Back" href="/" />
+        </div>
+
+        {/* PROCESS BUTTON */}
+        {previewImage && (
+          <div className="absolute bottom-48 md:bottom-28 right-6 md:right-8">
+            <div 
+              className="relative w-10 h-10 md:w-12 flex items-center justify-center
+              border border-black rotate-45 cursor-pointer"
+              onClick={handleProcessImage}
+            >
+              <span className="absolute rotate-[-45deg] text-xs scale-[0.7] md:scale-[0.8] -semibold">
+                PROCESS
+              </span>
+            </div>
+          </div>
+        )
+
+        }
       </div>
     </>
   );

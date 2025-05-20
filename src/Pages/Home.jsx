@@ -27,7 +27,7 @@ const Home = () => {
         <div className="text-7xl font-bold">
           Sophisticated <br /> skincare
         </div>
-        <Link to="TakeTheTest" className="pr-24 text-base font-semibold cursor-pointer">Take the Test</Link>
+        <Link to="/Introduction" className="pr-24 text-base font-semibold cursor-pointer">Take the Test</Link>
       </div>
       <div className="pt-40 pl-24 font-medium">
         Skinstric developed an A.I. that creates a <br/>
