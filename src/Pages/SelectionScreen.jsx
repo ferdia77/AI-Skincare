@@ -1,4 +1,4 @@
-import Link from "next/link";
+
 import React, { useRef, useCallback } from "react";
 //import Header from "@/components/header";
 import { gsap } from "gsap";
@@ -24,8 +24,20 @@ const SelectionScreen = () => {
 
   return (
     <>
-      <div className='absolute'>
-        Man
+      <div className='absolute top-10 left-8 tex-left mt-5'>
+        <h1 className="text-normal font-bold">
+          A.I. ANALYSIS
+        </h1>
+        <p className="text-xs mt-1 text-muted-foreground">
+          A.I. has estimated the following: <br />
+          Fix estimated information if needed
+        </p>
+      </div>
+
+      <div className="relative z-10 grid grid-cols-3 grid-rows-3 gap-[1px]">
+        {[
+
+        ]}
       </div>
     </>
   )
