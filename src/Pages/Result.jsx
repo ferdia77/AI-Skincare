@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import Diamond from "../Components/Diamond";
 import { Camera, Image as ImageIcon } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const continuousRotation = (target, duration) => {
   gsap.to(target, {
@@ -25,7 +26,8 @@ const Result = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [apiProgress, setAPIProgress] = useState(0);
   const [apiMessage, setAPIMessage] = useState("");
-
+  const navigate = useNavigate();
+  
   const outerDiamondRefCamera = useRef(null);
   const midDiamondRefCamera = useRef(null);
   const innerDiamondRefCamera = useRef(null);
@@ -64,9 +66,9 @@ const Result = () => {
     };
   }, []);
 
-  const handleCameraAccess = () => {
-    Router.push("/scan");
-  };
+  // const handleCameraAccess = () => {
+  //   Router.push("/scan");
+  // };
 
   const handleGalleryUpload = () => {
     fileInputRef.current.click();
@@ -115,7 +117,7 @@ const Result = () => {
       setAPIMessage("Processing complete!");
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      Router.push("/select");
+      navigate("/select");
     } catch (error) {
       console.error("Error processing image:", error);
       setAPIMessage("An error occurred during processing.");
