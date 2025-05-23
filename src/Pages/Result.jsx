@@ -3,8 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import Diamond from "../Components/Diamond";
 import { Camera, Image as ImageIcon } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigation } from "react-router-dom";
 
 const continuousRotation = (target, duration) => {
   gsap.to(target, {
@@ -26,7 +25,7 @@ const Result = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [apiProgress, setAPIProgress] = useState(0);
   const [apiMessage, setAPIMessage] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigation();
   
   const outerDiamondRefCamera = useRef(null);
   const midDiamondRefCamera = useRef(null);
