@@ -2,18 +2,13 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Camera, Diamond } from "lucide-react";
 import Header from "../components/Header";
-
-import {
-  ToastProvider,
-  Toast,
-  ToastTitle,
-  ToastDescription,
-  ToastViewport,
-} from "@/components/ui/toast";
-import Compressor from "compressorjs";
+import { useToast } from "@/hooks/use-toast"
+ 
+// import Compressor from "compressorjs";
 
 const Scan = () => {
   const router = useRouter();
+  const { toast } = useToast();
   const videoRef = useRef(null);
   const [state, setState] = useState({
     hasPermission: null,

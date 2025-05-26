@@ -1,11 +1,8 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const pathname = usePathname();
 
   return (
     <div className="flex flex-row h-[64px] w-full justify-between py-3 mb-3">

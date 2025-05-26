@@ -1,9 +1,11 @@
 import React, { useRef, useCallback } from "react";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast"
 
 const SelectionScreen = () => {
   const diamondRefs = useRef(Array(4).fill(null));
+  const { toast } = useToast();
 
   const handleHover = useCallback((index) => {
     gsap.to(diamondRefs.current[index], {
@@ -114,7 +116,12 @@ const SelectionScreen = () => {
             className="relative w-12 h-12 flex items-center justify-center border
            border-black rotate-45 cursor-pointer"
           >
-            <span className="absolute rotate-[-45deg] text-xs font-semibold">
+            <span onClick={() => {
+              toast({
+                title:"Hello",
+                description:"hello"
+              })
+            }} className="absolute rotate-[-45deg] text-xs font-semibold">
               Home
             </span>
           </div>
