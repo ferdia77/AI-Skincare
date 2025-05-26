@@ -1,5 +1,4 @@
 import React, { useRef, useCallback } from "react";
-//import Header from "@/components/header";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
 
@@ -7,9 +6,18 @@ const SelectionScreen = () => {
   const diamondRefs = useRef(Array(4).fill(null));
 
   const handleHover = useCallback((index) => {
-    gsap.to(diamondsRefs.current[index], {
+    gsap.to(diamondRefs.current[index], {
       opacity: 1,
       scale: 1,
+      duration: 0.3,
+      stagger: 0.2,
+    });
+  }, []);
+
+  const handleLeave = useCallback((index) => {
+    gsap.to(diamondRefs.current[index], {
+      opacity: 0,
+      scale: 0.8,
       duration: 0.3,
       stagger: 0.2,
     });
@@ -88,10 +96,10 @@ const SelectionScreen = () => {
             ))}
           </div>
 
-          <div className="absolute bottom-8 w-full flex-justify-between px-8">
+          <div className="absolute bottom-8 w-full flex justify-between px-8">
             <Link href="/result">
               <div
-                className="relative w-12 h-12 flex-items justify-center border
+                className="relative w-12 h-12 flex items-center justify-center border
                 border-black rotate-45 cursor-pointer"
               >
                 <span className="absolute rotate-[-45deg] text-xs font-semibold">
