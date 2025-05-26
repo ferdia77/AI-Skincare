@@ -95,31 +95,30 @@ const SelectionScreen = () => {
               </div>
             ))}
           </div>
-
-          <div className="absolute bottom-8 w-full flex justify-between px-8">
-            <Link href="/result">
-              <div
-                className="relative w-12 h-12 flex items-center justify-center border
-                border-black rotate-45 cursor-pointer"
-              >
-                <span className="absolute rotate-[-45deg] text-xs font-semibold">
-                  Back
-                </span>
-              </div>
-            </Link>
-
-            <Link href="/">
-              <div
-                className="relative w-12 h-12 flex items-center justify-center border
-           border-black rotate-45 cursor-pointer"
-              >
-                <span className="absolute rotate-[-45deg] text-xs font-semibold">
-                  Home
-                </span>
-              </div>
-            </Link>
-          </div>
         </div>
+      </div>
+      <div className="absolute bottom-0 w-full flex justify-between px-8">
+        <Link href="/result">
+          <div
+            className="relative w-12 h-12 flex items-center justify-center border
+                border-black rotate-45 cursor-pointer"
+          >
+            <span className="absolute rotate-[-45deg] text-xs font-semibold">
+              Back
+            </span>
+          </div>
+        </Link>
+
+        <Link href="/">
+          <div
+            className="relative w-12 h-12 flex items-center justify-center border
+           border-black rotate-45 cursor-pointer"
+          >
+            <span className="absolute rotate-[-45deg] text-xs font-semibold">
+              Home
+            </span>
+          </div>
+        </Link>
       </div>
     </>
   );

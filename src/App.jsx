@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Testing from "./Pages/Testing.jsx";
 import Result from "./Pages/Result.jsx";
 import SelectionScreen from "./Pages/SelectionScreen.jsx";
+import Scan from "./Pages/Scan.jsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/Testing" element={<Testing />} />
         <Route path="/Result" element={<Result />} />
         <Route path="/Select" element={<SelectionScreen />} />
+        <Route path="/Scan" element={<Scan />} />
       </Routes>
     </Router>
   );
