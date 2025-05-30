@@ -39,8 +39,10 @@ const SelectionScreen = () => {
     //Handle selection logic here
     console.log("Selected:", selectionType);
     // if need to navigate or update state, do it here
-    
-  }, []);
+    if (selectionType === "Demographics") {
+      navigate("/final");
+    }
+  }, [navigate]);
 
   return (
     <>
