@@ -3,8 +3,10 @@ import { gsap } from "gsap";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
+import { useNavigate } from "react-router-dom";
 
 const SelectionScreen = () => {
+  const navigate = useNavigate();
   const diamondRefs = useRef(Array(4).fill(null));
   const { toast } = useToast();
 
@@ -37,6 +39,7 @@ const SelectionScreen = () => {
     //Handle selection logic here
     console.log("Selected:", selectionType);
     // if need to navigate or update state, do it here
+    
   }, []);
 
   return (
@@ -63,14 +66,14 @@ const SelectionScreen = () => {
 
           <div className="relative z-10 grid grid-cols-3 grid-rows-3 gap-[1px]">
             {[
-              { position: 1, label: "Demographics", link: "/final" },
+              { position: 1, label: "Demographics", navigate:("/final") },
               { position: 3, label: "Cosmetic Concerns" },
               { position: 5, label: "Skin Type Details" },
               { position: 7, label: "Weather" },
             ].map((item, index) => (
               <div
                 key={item.position}
-                className={`flex otems-center justify-center ${
+                className={`flex items-center justify-center ${
                   item.position === 1
                     ? "col-start-2"
                     : item.position === 3
@@ -133,7 +136,7 @@ const SelectionScreen = () => {
           </div>
         </Link>
       </div>
-      <Header />
+    
     </>
   );
 };

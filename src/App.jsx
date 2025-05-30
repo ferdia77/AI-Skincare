@@ -6,6 +6,7 @@ import SelectionScreen from "./Pages/SelectionScreen.jsx";
 import Scan from "./Pages/Scan.jsx";
 import { Toaster } from "./components/ui/toaster.js";
 import Introduction from "./Pages/Introduction.jsx";
+import Final from "./Pages/Final.jsx";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/Result" element={<Result />} />
         <Route path="/Select" element={<SelectionScreen />} />
         <Route path="/Scan" element={<Scan />} />
+        <Route path="/Final" element={<Final />} />
       </Routes>
       <Toaster/>
     </Router>
