@@ -29,6 +29,41 @@ const Final = () => {
                     <h3 className="text-4xl md:text-6xl font-normal leading-tight">Demographics</h3>
                     <h4 className="text-sm md:text-base mt-1">PREDICTED RACE & AGE</h4>
                 </div>
+
+                {/* Main Content Grid */}
+                <div className="grid md:grid-cols-[3fr-7fr-5fr] gap-4 mt-10 mb-40 md:gap-6 pb-0 md:mb-0">
+                    {/* Selection Coloumn */}
+                    <div className="bg-gray-100 p-4 rounded-lg space-y-4">
+                        {["race","age", "gender"].map((section) => (
+                            <>
+                                <div 
+                                    key={section}
+                                    className={`p-3 rounded-lg cursor-pointer transition-colors ${
+                                        activeSection === section
+                                            ? "bg-black text-white"
+                                            : "bg-white"
+                                    }`}
+                                    onClick={() => setActiveSection(section)}
+                                />
+                                    <h4 className="text-sm font-medium mb-1">
+                                        {section.toUpperCase()}
+                                    </h4>
+                                    {analysisResult ? (
+                                        <p className="text-xs">
+                                            {section === "age"
+                                            ? getHighestConfidence(section)[0]
+                                            : getHighestConfidence(section)[0].toUpperCase()}
+                                        </p>
+                                    ) : (
+                                        <p className="text-xs">Loading...</p>
+                                    )}
+                                </div>
+                            </>
+                            
+                        ))}
+                        
+                    </div>
+                </div>
             </div>
         </main>
     </div>
