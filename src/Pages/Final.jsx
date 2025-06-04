@@ -19,8 +19,15 @@ const Final = () => {
 
   const getHighestConfidence = (category) => {
     if (!analysisResult) return [["", 0]];
-    return Object.entries(analysisResult[category]).reduce((a, b) => 
-        a[1] > b[1] ? a : b
+    return Object.entries(analysisResult[category]).reduce((a, b) =>
+      a[1] > b[1] ? a : b
+    );
+  };
+
+  const getSortedConfidence = (category) => {
+    if (!analysisResult) return [];
+    return Object.entries(analysisResult[category]).reduce((a, b) =>
+      a[1] > b[1] ? a : b
     );
   };
 
@@ -125,28 +132,61 @@ const Final = () => {
                 ) : (
                   <p className="text-sm">Loading...</p>
                 )}
-              </div> 
+              </div>
+            </div>
+          </div>
+
+          {/* Confidence Bars */}
+          <div className="bg-gray-100 p-4 rounded-lg">
+            <div className="space-y-2">
+              <h4 className="text-sm font-medium mb-2">A.I. Confidence</h4>
+              {analysisResult ? (
+                getSortedConfidence(activeSection).map(([key, value]) => (
+                  <div key={key} className="flex items-center gap-2 text-xs">
+                    <span className="w-20 truncate">
+                      {typeof key === "string"
+                        ? key.charAt(0).toUpperCase() + key.slice(1)
+                        : key}
+                    </span>
+                    <div className="flex-1 bg-gray-200 rounded-full h-2">
+                      <div
+                        className="bg-black h-2 rounded-full"
+                        style={{ width: `${(value * 100).toFixed(2)}%` }}
+                      />
+                    </div>
+                    <span className="w-8 text-right">
+                      {(value * 100).toFixed(1)}%
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <p className="text-sm">Loading...</p>
+              )}
             </div>
           </div>
 
           {/* Navigation Buttons */}
-            <div className="border-t pt-4 pb-6 bg-white sticky bottom-40 md:static md:bottom-0 mb-8 md:mb-16">
-                <div className="flex justify-between max-w-6xl mx-auto px-4 md:px-8">
-                    <Link
-                        href="/Select"
-                        className="rotate-[45deg] hover:bg-gray-100 transition-colors w-10 h-10 flex
+          <div className="border-t pt-4 pb-6 bg-white sticky bottom-40 md:static md:bottom-0 mb-8 md:mb-16">
+            <div className="flex justify-between max-w-6xl mx-auto px-4 md:px-8">
+              <Link
+                href="/Select"
+                className="rotate-[45deg] hover:bg-gray-100 transition-colors w-10 h-10 flex
                         flex-items justify-center border border-black"
-                    >
-                        <span className="rotate-[-45deg] text-xs font-semibold">Back</span>
-                    </Link>
-                    <Link
-                        href="/"
-                        className="rotate-45 hover:bg-gray-100 transition-colors w-10 h-10 flex items-center justify-center"
-                    >
-                    <span className="rotate-[-45deg] text-xs font-semibold">Home</span>
-                    </Link>
-                </div>
+              >
+                <span className="rotate-[-45deg] text-xs font-semibold">
+                  Back
+                </span>
+              </Link>
+              <Link
+                href="/"
+                className="rotate-45 hover:bg-gray-100 transition-colors w-10 h-10 flex items-center justify-center"
+              >
+                <span className="rotate-[-45deg] text-xs font-semibold">
+                  Home
+                </span>
+              </Link>
             </div>
+          </div>
         </main>
       </div>
     </>
