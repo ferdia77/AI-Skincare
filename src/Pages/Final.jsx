@@ -19,14 +19,16 @@ const Final = () => {
 
   const getHighestConfidence = (category) => {
     if (!analysisResult) return [["", 0]];
+    console.log(analysisResult)
     return Object.entries(analysisResult[category]).reduce((a, b) =>
       a[1] > b[1] ? a : b
     );
   };
 
-  const getSortedConfidence = (category) => {
+  const getSortedConfidenceData = (category) => {
     if (!analysisResult) return [];
-    return Object.entries(analysisResult[category]).reduce((a, b) =>
+    console.log((analysisResult[category]))
+    return Object.entries(analysisResult[category]).sort((a, b) =>
       a[1] > b[1] ? a : b
     );
   };
@@ -50,7 +52,7 @@ const Final = () => {
             </div>
 
             {/* Main Content Grid */}
-            <div className="grid md:grid-cols-[3fr, -7fr, 5fr] gap-4 mt-10 mb-40 md:gap-6 pb-0 md:mb-0">
+            <div className="grid md:grid-cols-[3fr_7fr_5fr] gap-4 mt-10 mb-40 md:gap-6 pb-0 md:pb-0 md:mb-0">
               {/* Selection Coloumn */}
               <div className="bg-gray-100 p-4 rounded-lg space-y-4">
                 {["race", "age", "gender"].map((section) => (
@@ -138,28 +140,26 @@ const Final = () => {
 
           {/* Confidence Bars */}
           <div className="bg-gray-100 p-4 rounded-lg">
-            <div className="space-y-2">
-              <h4 className="text-sm font-medium mb-2">A.I. Confidence</h4>
-              {analysisResult ? (
-                getSortedConfidence(activeSection).map(([key, value]) => (
-                  <div key={key} className="flex items-center gap-2 text-xs">
-                    <span className="w-20 truncate">
-                      {typeof key === "string"
-                        ? key.charAt(0).toUpperCase() + key.slice(1)
-                        : key}
-                    </span>
-                    <div className="flex-1 bg-gray-200 rounded-full h-2">
-                      <div
-                        className="bg-black h-2 rounded-full"
-                        style={{ width: `${(value * 100).toFixed(2)}%` }}
-                      />
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium mb-2">A.I. CONFIDENCE</h4>
+                {analysisResult ? (
+                  getSortedConfidenceData(activeSection).map(([key, value]) => (
+                    <div key={key} className="flex items-center gap-2 text-xs">
+                      <span className="w-20 truncate">
+                        {key.charAt(0).toUpperCase() + key.slice(1)}
+                      </span>
+                      <div className="flex-1 bg-gray-200 rounded-full h-2">
+                        <div
+                          className="bg-black h-2 rounded-full"
+                          style={{ width: `${(value * 100).toFixed(2)}%` }}
+                        />
+                      </div>
+                      <span className="w-8 text-right">
+                        {(value * 100).toFixed(1)}%
+                      </span>
                     </div>
-                    <span className="w-8 text-right">
-                      {(value * 100).toFixed(1)}%
-                    </span>
-                  </div>
-                ))
-              ) : (
+                  ))
+                ) : (
                 <p className="text-sm">Loading...</p>
               )}
             </div>
