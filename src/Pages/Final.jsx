@@ -19,7 +19,7 @@ const Final = () => {
 
   const getHighestConfidence = (category) => {
     if (!analysisResult) return [["", 0]];
-    console.log(analysisResult)
+    console.log(analysisResult);
     return Object.entries(analysisResult[category]).reduce((a, b) =>
       a[1] > b[1] ? a : b
     );
@@ -27,7 +27,7 @@ const Final = () => {
 
   const getSortedConfidenceData = (category) => {
     if (!analysisResult) return [];
-    console.log((analysisResult[category]))
+    console.log(analysisResult[category]);
     return Object.entries(analysisResult[category]).sort((a, b) =>
       a[1] > b[1] ? a : b
     );
@@ -135,35 +135,40 @@ const Final = () => {
                   <p className="text-sm">Loading...</p>
                 )}
               </div>
+              <div className="bg-gray-100 p-4 rounded-lg">
+                <div className="space-y-2">
+                  <h4 className="text-sm font-medium mb-2">A.I. CONFIDENCE</h4>
+                  {analysisResult ? (
+                    getSortedConfidenceData(activeSection).map(
+                      ([key, value]) => (
+                        <div
+                          key={key}
+                          className="flex items-center gap-2 text-xs"
+                        >
+                          <span className="w-20 truncate">
+                            {key.charAt(0).toUpperCase() + key.slice(1)}
+                          </span>
+                          <div className="flex-1 bg-gray-200 rounded-full h-2">
+                            <div
+                              className="bg-black h-2 rounded-full"
+                              style={{ width: `${(value * 100).toFixed(2)}%` }}
+                            />
+                          </div>
+                          <span className="w-8 text-right">
+                            {(value * 100).toFixed(1)}%
+                          </span>
+                        </div>
+                      )
+                    )
+                  ) : (
+                    <p className="text-sm">Loading...</p>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Confidence Bars */}
-          <div className="bg-gray-100 p-4 rounded-lg">
-              <div className="space-y-2">
-                <h4 className="text-sm font-medium mb-2">A.I. CONFIDENCE</h4>
-                {analysisResult ? (
-                  getSortedConfidenceData(activeSection).map(([key, value]) => (
-                    <div key={key} className="flex items-center gap-2 text-xs">
-                      <span className="w-20 truncate">
-                        {key.charAt(0).toUpperCase() + key.slice(1)}
-                      </span>
-                      <div className="flex-1 bg-gray-200 rounded-full h-2">
-                        <div
-                          className="bg-black h-2 rounded-full"
-                          style={{ width: `${(value * 100).toFixed(2)}%` }}
-                        />
-                      </div>
-                      <span className="w-8 text-right">
-                        {(value * 100).toFixed(1)}%
-                      </span>
-                    </div>
-                  ))
-                ) : (
-                <p className="text-sm">Loading...</p>
-              )}
-            </div>
-          </div>
 
           {/* Navigation Buttons */}
           <div className="border-t pt-4 pb-6 bg-white sticky bottom-40 md:static md:bottom-0 mb-8 md:mb-16">
