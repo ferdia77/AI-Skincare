@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { Camera, Diamond } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 
 const Scan = () => {
   const videoRef = useRef(null);
-  navigate = useNavigate();
+  const navigate = useNavigate();
   const [state, setState] = useState({
     hasPermission: null,
     videoStream: null,
@@ -12,7 +14,7 @@ const Scan = () => {
     countdown: 3,
     isCapturing: false,
     flashActive: false,
-    isLoading,
+    isLoading: false,
   });
 
   //cleans up video stream on unmount
@@ -56,7 +58,7 @@ const Scan = () => {
     if (state.countdown === 0 && state.isCapturing) {
       handleCaptureImage();
     }
-  }, state.countdown, state.isCapturing);
+  }, [state.countdown, state.isCapturing]);
 
   const handleCameraError = (error) => {
     console.error("Camera error:", error);
@@ -146,16 +148,79 @@ const Scan = () => {
   );
 
 
+  const renderCameraInterface = () => (
+    <div className="relative w-full h-screen">
+      <video 
+        const ref={videoRef}
+        autoPlay
+        playsInline
+        className="absolute top-0 left-0 w-full object-cover transform scale-x-[-1]"
+      />
+      <button
+        className="absolute right-6 top-1/2 flex items-center justify-center w-16 h-16 bg-white
+        text-green-500 rounded-full shadow-lg"
+        onClick={startCountdown}
+      > 
+        <Camera size={24} />
+      </button>
+
+      {state.isCapturing && (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-5xl font-bold text-green-500">
+          {state.countdown}
+        </div>
+      )}
+
+      {state.flashActive && (
+        <div className="absolute top-0 left-0 w-full h-full bg-white opacity-50 animate-flash" />
+      )}
+
+      <div className="absolute flex flex-col bottom-24 md:bottom-0 left-1/2 transform -translate-x-1/2 z-10">
+        <div className="text-white flex flex-col text-center">
+          <p>To get better results make sure to have</p>
+          <div className="flex w-full mt-5 uppercase mb-10 text-xs md:text-sm">
+            {["Neutral Expression", "Frontal Pose", "Adequate Lighting"].map(
+              (text) => (
+                <div key={text} className="flex mr-4">
+                  <Diamond  size={18} className="mt-[2px]"/>
+                  <p className="px-2">{text}</p>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const showToast = () => {
+    toast({
+      title: "hello",
+      description: "good day",
+    });
+  };
+
+
 
   return ( 
     <>
       <div className="min-h-screen flex flex-col justify-center items-center bg-white">
-        
+        {state.hasPermission === null && renderPermissionRequest()}
+        {state.hasPermission === true && renderCameraInterface()}
+        {state.hasPermission === false && (
+          <div className="text-center">
+            <h1 className="text-xl font-semibold">Permission Denied</h1>
+            <p className="mt-4 text-sm">You have denied camera access.</p>
+          </div>
+        )}
+
+        {state.toast && (
+          <Toast variant={state.toast.variant}>
+            
+          </Toast>
+        )}
       </div>
     </>
   )
 }
 
-export default Scan
-
-Scan
+export default Scan;

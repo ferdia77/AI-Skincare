@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import Diamond from "@/components/Diamond";
@@ -65,9 +64,9 @@ const Result = () => {
     };
   }, []);
 
-  // const handleCameraAccess = () => {
-  //   Router.push("/scan");
-  // };
+   const handleCameraAccess = () => {
+     Router.push("/scan");
+   };
 
   const handleGalleryUpload = () => {
     fileInputRef.current.click();
@@ -162,6 +161,7 @@ const Result = () => {
           <div
             className="relative md:absolute md:left-[40%] md:-translate-x-full
           flex flex-col items-center cursor-pointer"
+          onClick={() => navigate("/scan")}
           >
             <Diamond
               ref={outerDiamondRefCamera}

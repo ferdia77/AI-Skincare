@@ -1,6 +1,7 @@
 import { Link } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
+
 const Final = () => {
   const [analysisResult, setAnalysisResult] = useState(null);
   const [activeSection, setActiveSection] = useState("race");
