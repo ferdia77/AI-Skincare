@@ -1,11 +1,11 @@
-import Home from "./Pages/Home.jsx";
+import Home from "./pages/Home.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Testing from "./Pages/Testing.jsx";
-import Result from "./Pages/Result.jsx";
-import SelectionScreen from "./Pages/SelectionScreen.jsx";
-import Scan from "./Pages/Scan.jsx";
-import Introduction from "./Pages/Introduction.jsx";
-import Final from "./Pages/Final.jsx";
+import Testing from "./pages/Testing.jsx";
+import Result from "./pages/Result.jsx";
+import SelectionScreen from "./pages/SelectionScreen.jsx";
+import Scan from "./pages/Scan.jsx";
+import Introduction from "./pages/Introduction.jsx";
+import Final from "./pages/Final.jsx";
 
 function App() {
   return (
