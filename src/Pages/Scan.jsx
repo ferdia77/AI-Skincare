@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Camera, Diamond } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
 
 
 const Scan = () => {
