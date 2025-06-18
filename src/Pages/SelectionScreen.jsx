@@ -2,7 +2,6 @@ import React, { useRef, useCallback } from "react";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import Header from "@/components/Header";
 import { useNavigate } from "react-router-dom";
 
 const SelectionScreen = () => {

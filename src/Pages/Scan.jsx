@@ -100,7 +100,7 @@ const Scan = () => {
                 variant: "default",
               },
             }));
-            setTimeout(() => navigate.push("/result"), 2000);
+            setTimeout(() => navigate("/result"), 2000);
           };
           reader.readAsDataURL(compressedBlob);
         },
@@ -192,12 +192,7 @@ const Scan = () => {
     </div>
   );
 
-  const showToast = () => {
-    toast({
-      title: "hello",
-      description: "good day",
-    });
-  };
+  
 
 
 
