@@ -1,4 +1,3 @@
-'useClient'
 import React, { useRef, useState, useEffect } from "react";
 import { Router, useNavigate, } from "react-router-dom";
 
@@ -58,44 +57,53 @@ const Introduction = () => {
   }
 
   return (
-    <div>
+    <>
       <div className="pl-12 pt-4">
         <a className="px-3 text-xs font-bold cursor-pointer ">SKINSTRIC</a>
         <a className="text-xs">[INTRO]</a>
       </div>
       <div className="pl-12 pt-6">To Start Analysis</div>
-      <div className="relative flex flex-col items-center justify-center mb-40">
+      <div className="h-screen flex flex-col items-center mt-40">
         <p className="text-[10px] text-gray-400 tracking-wider uppercase mb-1">
           CLICK TO TYPE
         </p>
-        {phase === 1 ? (
-          <>
-            <input
-              ref={locationInputRef}
-              className="text-3xl font-semibold text-center bg-transparent border-b
-            border-black focus:outline-none appearance-none w-[300px] leading-none pt-1"
-              placeholder="Introduce Yourself"
-              onKeyDown={handleNameKeyPress}
-              type="text"
-              value={name}
-              onChange={handleNameChange}
-            />
-            {name.length > 0 && <button onClick={handleNameKeyPress}>Proceed</button>}
-          </>
-        ) : (
-          <>
-            <input
-              ref={locationInputRef}
-              className="text-3xl font-semibold text-center bg-transparent border-b
-            border-black focus:outline-none appearance-none w-[320px] leading-none pt-1"
-              placeholder="What City are you from"
-              value={location}
-              onChange={handleLocationChange}
-              type="text"
-            />
-            {name.length > 0 && <button onClick={handleSubmit}>Proceed</button>}
-          </>
-        )}
+        <div className="flex flex-col items-center justify-center bg-white text-center">
+          {phase === 1 ? (
+            <div className="relative flex flex-col items-center justify-center bg-white text-center">
+
+              <input
+                ref={locationInputRef}
+                className="text-3xl font-semibold text-center bg-transparent border-b
+              border-black focus:outline-none appearance-none w-[300px] leading-none pt-1"
+                placeholder="Introduce Yourself"
+                onKeyDown={handleNameKeyPress}
+                type="text"
+                value={name}
+                onChange={handleNameChange}
+              />
+              {name.length > 0 && <button onClick={handleNameKeyPress}>Proceed</button>}
+            </div>
+          ) : (
+            <div className="relative flex flex-col items-center justify-center bg-white text-center">
+              <input
+                ref={locationInputRef}
+                className="text-3xl font-semibold text-center bg-transparent border-b
+              border-black focus:outline-none appearance-none w-[320px] leading-none pt-1"
+                placeholder="What City are you from"
+                value={location}
+                onChange={handleLocationChange}
+                type="text"
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    handleSubmit();
+                  }
+                }}
+              />
+              {name.length > 0 && <button onClick={handleSubmit}>Proceed</button>}
+            </div>
+          )}
+        </div>
+        
       </div>
       <div className="absolute bottom-10 w-full flex justify-between px-10 cursor-pointer">
         <div
@@ -108,7 +116,7 @@ const Introduction = () => {
         </div>
         <a className="absolute inset-0" label="BACK" href="/"></a>
       </div>
-    </div>
+    </>
   );
 };
 

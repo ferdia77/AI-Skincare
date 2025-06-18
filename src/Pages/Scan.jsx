@@ -79,7 +79,7 @@ const Scan = () => {
     canvas.height = videoRef.current.videoHeight;
 
     const ctx = canvas.getContext("2d");
-    ctx.drawlImage(videoRef.current, 0, 0, canvas.width, canvas.height)
+    ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height)
 
     canvas.toBlob((blob) => {
       newCompressor(blob, {
