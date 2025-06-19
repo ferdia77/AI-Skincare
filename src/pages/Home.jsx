@@ -64,9 +64,9 @@ const Home = () => {
                   Sophisticated <br />
                   Skincare
                 </h1>
-                <a href="/testing">
+                <Link href="/testing">
                   <button className="bg-black text-white font-roobert px-6 py-3 text-[12px] leading-5 uppercase font-semibold tracking-tight">ENTER EXPERIENCE</button>
-                </a>
+                </Link>
              </div>  
           </div>
         </main>
